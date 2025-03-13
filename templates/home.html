@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5G Scan - Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+
+        body {
+            background-color: #0A192F; 
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+    
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #112D4E;
+            padding: 15px 30px;
+            border-radius: 10px;
+        }
+
+        .navbar .logo {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .logo img {
+            width: 50px;
+            height: 50px;
+            margin-right: 10px;
+        }
+
+        .navbar h2 {
+            color: #00A8E8; 
+            font-size: 24px;
+            text-transform: uppercase;
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar ul li {
+            display: inline;
+        }
+
+        .navbar ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            padding: 10px;
+            transition: 0.3s;
+        }
+
+        .navbar ul li a:hover {
+            background: #00A8E8;
+            border-radius: 5px;
+        }
+
+
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 40px auto;
+            background: #1B3A57;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+        }
+
+        h1 {
+            color: #00A8E8;
+            margin-bottom: 20px;
+        }
+
+
+        .image-section img {
+            width: 100%;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            text-align: left;
+            font-size: 16px;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .description ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .description li {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+            padding: 10px;
+            background: rgba(0, 168, 232, 0.2);
+            border-left: 4px solid #00A8E8;
+            margin-bottom: 10px;
+            padding-left: 10px;
+        }
+
+        .button {
+            display: inline-block;
+            margin-top: 20px;
+            background: #00A8E8;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-size: 18px;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .button:hover {
+            background: #0077B6;
+        }
+    </style>
+</head>
+<body>
+
+
+    <nav class="navbar">
+        <div class="logo">
+            <img src="electrothon-logo.jpg" alt="Logo">
+            <h2>5G Scan</h2>
+        </div>
+        <ul>
+            <li><a href="home.html">Home</a></li>
+            <li><a href="features.html">Features</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+
+    <div class="container">
+        <h1>Welcome to 5G Scan</h1>
+
+        <div class="image-section">
+            <img src="5g-network.jpg" alt="5G Network">
+        </div>
+
+        <div class="description">
+            <ul id="feature-list">
+                <li>🚀 Real-Time Network Analysis - Get instant insights on your 5G connectivity.</li>
+                <li>⚡ Speed Testing - Monitor download and upload speeds accurately.</li>
+                <li>📍 Coverage Mapping- Identify weak and strong signal zones.</li>
+                <li>🔍 Interference Detection - Detect and resolve potential network issues.</li>
+                <li>📊 Performance Reports - Analyze and optimize network performance over time.</li>
+            </ul>
+        </div>
+
+        <a href="features.html" class="button">Explore Features</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const listItems = document.querySelectorAll("#feature-list li");
+            listItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = "1";
+                    item.style.transform = "translateY(0)";
+                }, index * 500);
+            });
+        });
+    </script>
+
+</body>
+</html>

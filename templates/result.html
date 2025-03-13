@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Speed Test Results</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+            background-color: #003366; 
+            color: white;
+            padding: 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        h1, h2 {
+            color: #80c1ff; 
+            margin-bottom: 15px;
+        }
+
+
+        table {
+            width: 90%;
+            max-width: 1000px;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #0066cc;
+            padding: 12px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        th {
+            background: #0066cc;
+            color: white;
+        }
+
+        tbody tr:nth-child(even) {
+            background: #336699;
+        }
+
+        tbody tr:nth-child(odd) {
+            background: #1a4d80;
+        }
+
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1000px;
+            margin: 20px auto;
+        }
+
+        .grid-item {
+            background: #0055aa;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+
+        .graph-container {
+            width: 90%;
+            max-width: 1000px;
+            margin-top: 20px;
+        }
+
+        .signal-strength {
+            width: 90%;
+            max-width: 1000px;
+            background: #0055aa;
+            padding: 20px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+
+        .signal-bar {
+            display: flex;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .bar {
+            width: 20px;
+            height: 50px;
+            background-color: #ddd;
+            margin: 0 5px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bar::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #4CAF50;
+            transition: height 0.5s ease;
+        }
+
+        .bar-1::after { height: 20%; }
+        .bar-2::after { height: 40%; }
+        .bar-3::after { height: 60%; }
+        .bar-4::after { height: 80%; }
+        .bar-5::after { height: 100%; }
+
+        .signal-text {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            background: #002855;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 18px;
+            margin-top: 20px;
+            transition: 0.3s;
+        }
+
+        .back-button:hover {
+            background: #001a3d;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Network Speed Test Results</h1>
+
+    <h2>Tested Data (5 Simulated Tests)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Test</th>
+                <th>Download Speed (Mbps)</th>
+                <th>Upload Speed (Mbps)</th>
+                <th>Ping (ms)</th>
+                <th>Network Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for test in result %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ test.download_speed_mbps }}</td>
+                <td>{{ test.upload_speed_mbps }}</td>
+                <td>{{ test.ping_ms }}</td>
+                <td>{{ test.network_type }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <h2>Average Speeds</h2>
+    <div class="grid-container">
+        <div class="grid-item">Download: {{ avg_download_speed }} Mbps</div>
+        <div class="grid-item">Upload: {{ avg_upload_speed }} Mbps</div>
+        <div class="grid-item">Avg Ping: {{ avg_ping }} ms</div>
+    </div>
+
+    <h2>Network Speed Trends Over Time</h2>
+    <div class="graph-container">
+        {{ graph_html | safe }}
+    </div>
+
+
+    <div class="signal-strength">
+        <h2>Live Signal Strength</h2>
+        <div class="signal-bar">
+            <div class="bar bar-1"></div>
+            <div class="bar bar-2"></div>
+            <div class="bar bar-3"></div>
+            <div class="bar bar-4"></div>
+            <div class="bar bar-5"></div>
+        </div>
+        <div class="signal-text" id="signal-text">Signal Strength: 0%</div>
+    </div>
+
+    <a href="home.html" class="back-button">Back to Home</a>
+
+    <script>
+        function updateSignalStrength() {
+            const bars = document.querySelectorAll('.bar');
+            const signalText = document.getElementById('signal-text');
+
+
+            const strength = Math.floor(Math.random() * 101);
+
+
+            bars.forEach((bar, index) => {
+                const barHeight = (strength / 100) * (index + 1) * 20;
+                bar.style.setProperty('--bar-height', `${barHeight}%`);
+            });
+
+            signalText.textContent = `Signal Strength: ${strength}%`;
+
+
+            setTimeout(updateSignalStrength, 2000);
+        }
+
+
+        updateSignalStrength();
+    </script>
+</body>
+</html>
